@@ -123,3 +123,12 @@ kernel/configs/android-*.cfg
 #Ignoring Android.bp link file
 #
 Android.bp
+
+# Build directories
+/out
+/work
+/sakura
+/mido
+/daisy
+/tissot
+/ysl
