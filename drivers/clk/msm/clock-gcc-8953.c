@@ -3734,6 +3734,7 @@ static const struct msm_reset_map gcc_8953_resets[] = {
 
 };
 #define SPEED_BIN	7
+extern int enable_cpuoc;
 
 static void override_for_8953(struct platform_device *pdev)
 {
@@ -3757,6 +3758,9 @@ static void override_for_8953(struct platform_device *pdev)
 
 	bin = (config_efuse >> 8) & 0x7;
 
+	if (enable_cpuoc == 1) {
+		bin = 7; /* Use speedbin 7 with max 2.2Ghz */
+	}
 	if (bin == SPEED_BIN) {
 		vcodec0_clk_src.freq_tbl = ftbl_vcodec0_clk_src_540MHz;
 		vcodec0_clk_src.c.fmax[VDD_DIG_HIGH] = 540000000;

@@ -662,6 +662,7 @@ static int of_get_fmax_vdd_class(struct platform_device *pdev, struct clk *c,
 	return 0;
 }
 
+extern int enable_cpuoc;
 static void get_speed_bin(struct platform_device *pdev, int *bin,
 								int *version)
 {
@@ -690,6 +691,10 @@ static void get_speed_bin(struct platform_device *pdev, int *bin,
 	devm_iounmap(&pdev->dev, base);
 
 	*bin = (pte_efuse >> 8) & 0x7;
+
+	if (enable_cpuoc == 1) {
+                *bin = 7; /* Use speedbin 7 with max 2.2Ghz */
+        }
 
 	dev_info(&pdev->dev, "Speed bin: %d PVS Version: %d\n", *bin,
 								*version);

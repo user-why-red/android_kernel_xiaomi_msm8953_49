@@ -130,6 +130,21 @@ static char *initcall_command_line;
 static char *execute_command;
 static char *ramdisk_execute_command;
 
+int enable_cpuoc = 0;
+static int __init set_cpu_overclock(char *val)
+{
+        unsigned int option;
+
+        get_option(&val, &option);
+        if (option){
+                enable_cpuoc = 1;
+                pr_info("kernel: CPU is overclocked to 2.2Ghz\n");
+        }
+
+        return 0;
+}
+__setup("overclock.cpu=", set_cpu_overclock);
+
 /*
  * Used to generate warnings if static_key manipulation functions are used
  * before jump_label_init is called.
