@@ -12,3 +12,4 @@
  */
 
 #include "sakura/sakura.dtsi"
+#include "msm8953-gpu-oc.dtsi"
